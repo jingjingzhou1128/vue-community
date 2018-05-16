@@ -53,6 +53,11 @@
       }
     },
     components: { ArticleSummary },
+    watch: {
+      '$route'(to, from){
+        this.getData(to.query.tab ? to.query.tab : 'all')
+      }
+    },
     beforeMount() {
       let tab = this.$route.query.tab ? this.$route.query.tab : 'all'
       this.getData(tab);
@@ -62,12 +67,8 @@
 
 <style>
   .main-container {
-    min-width: 960px;
-    max-width: 1400px;
     width: 100%;
     background: #fff;
-    margin: 0 auto;
-    margin-top: 20px;
     border-radius: 5px;
   }
   .article-type {

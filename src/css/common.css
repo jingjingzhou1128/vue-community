@@ -1,0 +1,46 @@
+.panel {
+  background: #fff;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+.panel-white .panel-header {
+  background: #fff;
+  border-radius: 3px 3px 0 0;
+}
+.panel-grey .panel-header {
+  background: #f6f6f6;
+  border-radius: 3px 3px 0 0;
+}
+.panel-header, .panel-body {
+  padding: 15px;
+}
+.panel-header {
+  border-bottom: 1px solid #eee;
+}
+.panel-header .panel-title {
+  margin: 0;
+  font-size: 14px;
+  line-height: 30px;
+}
+.panel-header .minor-info {
+  color: #838383;
+}
+
+.label {
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  margin-right: 10px;
+}
+.label.light {
+background: #369219;
+}
+.label.grey {
+background: #b4b4b4;
+}
+
+.responsive-img {
+  width: 100%;
+  height: auto;
+}

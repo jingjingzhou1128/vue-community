@@ -2,8 +2,11 @@
   <div class="cell">
     <a href="#" class="author-logo"><img :src="article.author.avatar_url" :alt="article.author.loginname"></a>
     <span class="view-count"><small>{{ article.reply_count }}</small>/<small>{{ article.visit_count }}</small></span>
-    <p class="article-title"><span v-if="showTab" :class="tabClass">{{ tabName }}</span><a href="#">{{ article.title }}</a></p>
-    <span class="time">{{ article.last_reply_at }}</span>
+    <p class="article-title">
+      <span v-if="showTab" class="label" :class="tabClass">{{ tabName }}</span>
+      <router-link :to="{name: 'article', params: {id: article.id}}">{{ article.title }}</router-link>
+    </p>
+    <span class="time">{{ article.last_reply_at | formatTime }}</span>
   </div>
 </template>
 
@@ -35,6 +38,7 @@
 </script>
 
 <style>
+@import url("../css/common.css");
   .cell {
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
@@ -70,18 +74,6 @@
   .article-title {
     display: inline-block;
     margin: 0;
-  }
-  .article-title span {
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 12px;
-  }
-  .article-title span.light {
-    background: #369219;
-  }
-  .article-title span.grey {
-    background: #b4b4b4;
   }
   .article-title a {
     font-size: 16px;
