@@ -1,11 +1,13 @@
 <template>
-  <div class="main-container">
-    <ul class="article-type">
-      <li v-for="(type, index) in types" :key="index" :class="{ active: activeTab === type.name }" @click="changeTab(type.name)">
-        <router-link :to="{path: '/', query: {tab: type.name}}">{{ type.shown }}</router-link>
-      </li>
-    </ul>
-    <div class="article-list">
+  <div class="main-container panel panel-grey">
+    <div class="panel-header" style="padding: 0;">
+      <ul class="article-type">
+        <li v-for="(type, index) in types" :key="index" :class="{ active: activeTab === type.name }" @click="changeTab(type.name)">
+          <router-link :to="{path: '/', query: {tab: type.name}}">{{ type.shown }}</router-link>
+        </li>
+      </ul>
+    </div>
+    <div class="panel-body article-list" style="padding: 0;">
       <article-summary v-for="summary in articleList" :key="summary.id" :article="summary" :showTab="isShowTab"></article-summary>
     </div>
   </div>
@@ -68,13 +70,11 @@
 <style>
   .main-container {
     width: 100%;
-    background: #fff;
-    border-radius: 5px;
   }
   .article-type {
     list-style: none;
     background: #f6f6f6;
-    padding: 10px;
+    padding: 10px 15px;
     text-align: left;
     font-size: 14px;
     margin: 0;

@@ -79,7 +79,6 @@ export default {
 </script>
 
 <style>
-@import url("../css/common.css");
 .article-container {
   margin-right: 305px;
 }

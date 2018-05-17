@@ -2,7 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import ArticleDetail from '@/components/ArticleDetail'
-import ArticleAuthor from '@/components/ArticleAuthor'
+import User from '@/components/User'
+import UserBrief from '@/components/UserBrief'
+import UserHome from '@/components/UserHome'
+import UserTopics from '@/components/UserTopics'
 
 Vue.use(Router)
 
@@ -17,12 +20,43 @@ export default new Router({
       }
     },
     {
-      path: '/article/:id',
+      path: '/article/:id/:loginname',
       name: 'article',
       components: {
         main: ArticleDetail,
-        sidebar: ArticleAuthor
+        sidebar: UserBrief
       }
+    },
+    {
+      path: '/user/:loginname',
+      name: 'user',
+      components: {
+        main: User,
+        sidebar: UserBrief
+      },
+      children: [
+        {
+          path: '',
+          name: 'user-home',
+          components: {
+            home: UserHome
+          }
+        },
+        {
+          path: 'topics',
+          name: 'user-topics',
+          components: {
+            home: UserTopics
+          }
+        },
+        {
+          path: 'replies',
+          name: 'user-replies',
+          components: {
+            home: UserTopics
+          }
+        }
+      ]
     }
   ]
 })

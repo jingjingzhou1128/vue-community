@@ -1,10 +1,12 @@
 <template>
   <div class="cell">
-    <a href="#" class="author-logo"><img :src="article.author.avatar_url" :alt="article.author.loginname"></a>
-    <span class="view-count"><small>{{ article.reply_count }}</small>/<small>{{ article.visit_count }}</small></span>
+    <router-link :to="{name: 'user-home', params: {loginname: article.author.loginname}}" class="user-logo small vertical-middle">
+      <img :src="article.author.avatar_url" :alt="article.author.loginname" class="img-responsive">
+    </router-link>
+    <span class="view-count" v-if="showViewCount"><small>{{ article.reply_count }}</small>/<small>{{ article.visit_count }}</small></span>
     <p class="article-title">
       <span v-if="showTab" class="label" :class="tabClass">{{ tabName }}</span>
-      <router-link :to="{name: 'article', params: {id: article.id}}">{{ article.title }}</router-link>
+      <router-link :to="{name: 'article', params: {id: article.id, loginname: article.author.loginname}}">{{ article.title }}</router-link>
     </p>
     <span class="time">{{ article.last_reply_at | formatTime }}</span>
   </div>
@@ -32,31 +34,21 @@
       },
       tabName: function(){
         return this.article.top ? this.tabs['top'] : (this.article.good ? this.tabs['good'] : this.tabs[this.article.tab])
+      },
+      showViewCount: function(){
+        return (this.article.reply_count === undefined && this.article.visit_count === undefined) ? false : true
       }
     }
   }
 </script>
 
 <style>
-@import url("../css/common.css");
   .cell {
-    border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
     line-height: 50px;
     text-align: left;
-    padding: 0 10px;
+    padding: 0 15px;
     font-size: 14px;
-  }
-  .author-logo {
-    display: inline-block;
-  }
-  .author-logo img {
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
-    vertical-align: middle;
-    overflow: hidden;
-    display: inline-block;
   }
   .view-count {
     width: 70px;

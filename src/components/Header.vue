@@ -31,7 +31,6 @@
     max-width: 1400px;
     width: 100%;
     display: flex;
-    display: flex;
     justify-content: space-between;
     margin: 0 auto;
   }

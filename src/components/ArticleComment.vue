@@ -1,8 +1,10 @@
 <template>
   <div class="comment">
-    <a href="#" class="comment-logo"><img :src="comment.author.avatar_url"></a>
+    <router-link :to="{name: 'user-home', params: {loginname: comment.author.loginname}}" class="user-logo small">
+      <img :src="comment.author.avatar_url" class="img-responsive">
+    </router-link>
     <div class="comment-content">
-      <p><a href="#">{{ comment.author.loginname }}</a><small>{{ floor + 1 }}楼{{ comment.create_at | formatTime }}</small></p>
+      <p><router-link :to="{name: 'user-home', params: {loginname: comment.author.loginname}}">{{ comment.author.loginname }}</router-link><small>{{ floor + 1 }}楼{{ comment.create_at | formatTime }}</small></p>
       <p style="padding: 15px;margin: 0;" v-html="comment.content"></p>
     </div>
     <span class="thumbs-up"><i class="el-icon-star-off"></i>{{ comment.ups.length }}</span>
@@ -23,15 +25,6 @@ export default {
     border-bottom: 1px solid #eee;
     justify-content: space-between;
   }
-.comment-logo {
-  display: block;
-  width: 30px;
-}
-.comment-logo img {
-  width: 30px;
-  border-radius: 5px;
-  height: auto;
-}
 .comment-content {
   flex-grow: 1;
   padding: 0 15px;
