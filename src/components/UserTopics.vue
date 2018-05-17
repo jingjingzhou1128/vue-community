@@ -10,7 +10,7 @@
     </div>
     <div class="panel panel-grey">
       <div class="panel-header" style="padding:3px 15px; color: #369219;">
-        <p class="panel-title">{{ user.loginname }}创建的话题</p>
+        <p class="panel-title">最近{{ typeToChinese }}的话题</p>
       </div>
       <div class="panel-body" style="padding: 0;">
         <article-summary v-for="topic in topics" :key="topic.id" :article="topic" :showTab="isShowTab"></article-summary>
@@ -27,14 +27,23 @@ export default {
   data(){
     return {
       user: {},
-      isShowTab: false
+      isShowTab: false,
+      types: {
+        topics: '创建',
+        replies: '参与'
+      }
     }
   },
   computed: {
-    topics: function(){
+    type: function(){
       let pathArray = this.$route.fullPath && this.$route.fullPath.split("/")
-      let topic = pathArray[pathArray.length-1] == '/' ? pathArray[pathArray.length-2] : pathArray[pathArray.length-1]
-      return this.user[`recent_${topic}`]
+      return pathArray[pathArray.length-1] === "" ? pathArray[pathArray.length-2] : pathArray[pathArray.length-1]
+    },
+    topics: function(){
+      return this.user[`recent_${this.type}`]
+    },
+    typeToChinese: function(){
+      return this.types[this.type]
     }
   },
   methods: {
