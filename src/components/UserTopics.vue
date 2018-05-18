@@ -1,5 +1,5 @@
 <template>
-  <div class="topics">
+  <div class="topics" v-loading="loading">
     <div class="panel panel-grey">
       <div class="panel-header" style="padding: 0;">
         <ul class="breadcrumbs">
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import ArticleSummary from '@/components/ArticleSummary'
 export default {
   name: 'UserTopics',
@@ -31,7 +30,8 @@ export default {
       types: {
         topics: '创建',
         replies: '参与'
-      }
+      },
+      loading: true
     }
   },
   computed: {
@@ -48,9 +48,11 @@ export default {
   },
   methods: {
     getData(){
+      this.loading = true
       let loginname = this.$route.params && this.$route.params.loginname
-      axios.get(`https://www.vue-js.com/api/v1/user/${loginname}`).then((response) => {
+      this.$http.get(`https://www.vue-js.com/api/v1/user/${loginname}`).then((response) => {
         this.user = response.data.data
+        this.loading = false
         console.log(this.user)
       }).catch(function(error){
         console.log(error)

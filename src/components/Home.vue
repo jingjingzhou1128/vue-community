@@ -7,14 +7,13 @@
         </li>
       </ul>
     </div>
-    <div class="panel-body article-list" style="padding: 0;">
+    <div class="panel-body article-list" style="padding: 0;" v-loading="loading">
       <article-summary v-for="summary in articleList" :key="summary.id" :article="summary" :showTab="isShowTab"></article-summary>
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
   import ArticleSummary from '@/components/ArticleSummary'
   export default {
     name: 'Home',
@@ -28,7 +27,8 @@
           { name: 'ask', shown: '问答'},
           { name: 'job', shown: '招聘'},
         ],
-        articleList: null
+        articleList: null,
+        loading: true
       }
     },
     computed: {
@@ -41,10 +41,12 @@
     },
     methods: {
       getData(tab){
-        axios.get('https://www.vue-js.com/api/v1/topics', {
+        this.loading = true
+        this.$http.get('https://www.vue-js.com/api/v1/topics', {
           params: { page: 1, limit: 20, tab: tab}
         }).then((response) => {
           this.articleList = response.data.data
+          this.loading = false
           console.log(response.data.data)
         }).catch(function(error){
           console.log(error)
@@ -68,6 +70,9 @@
 </script>
 
 <style>
+.el-loading-parent--relative {
+  min-height: 200px;
+}
   .main-container {
     width: 100%;
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="article-container">
+  <div class="article-container" v-loading="loading">
     <div class="panel panel-default">
       <div class="panel-header">
         <h4 class="panel-title" style="font-size: 20px;"><span class="label" :class="tabClass">{{ tabName }}</span>{{ article.title }}</h4>
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import ArticleComment from '@/components/ArticleComment'
 
 export default {
@@ -39,7 +38,8 @@ export default {
         share: '分享',
         ask: '问答',
         job: '招聘'
-      }
+      },
+      loading: true
     }
   },
   computed: {
@@ -56,15 +56,17 @@ export default {
   components: { ArticleComment },
   methods: {
     getData(){
-      axios.get(`https://www.vue-js.com/api/v1/topic/${this.$route.params.id}`, {
+      this.loading = true
+      this.$http.get(`https://www.vue-js.com/api/v1/topic/${this.$route.params.id}`, {
         params: {mdrender: true}
       }).then((response) => {
         this.article = response.data.data
+        this.loading = false
         console.log(response.data.data)
       }).catch(function(error){
         console.log(error)
       })
-    },
+    }
   },
   watch: {
     $route(){

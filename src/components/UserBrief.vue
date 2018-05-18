@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'UserBrief',
   data(){
@@ -27,7 +26,7 @@ export default {
   methods: {
     getData(){
       let loginname = this.$route.params && this.$route.params.loginname
-      axios.get(`https://www.vue-js.com/api/v1/user/${loginname}`).then((response) => {
+      this.$http.get(`https://www.vue-js.com/api/v1/user/${loginname}`).then((response) => {
         this.user = response.data.data
         console.log(response.data.data)
       }).catch(function(error){
