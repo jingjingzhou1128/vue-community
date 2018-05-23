@@ -7,14 +7,34 @@
       </div>
       <ul class="header-menus">
         <li>关于</li>
+        <template v-if="user.success">
+          <li><router-link :to="{name: 'user-home', params: {loginname: user.loginname}}">{{ user.loginname }}</router-link></li>
+          <li style="cursor: pointer;" @click="logout">退出</li>
+        </template>
+        <li v-else style="cursor: pointer;"><router-link :to="{name: 'login'}">登录</router-link></li>
       </ul>
     </div>
   </nav>
 </template>
 
 <script>
+  import { mapGetters, mapActions } from 'vuex'
   export default {
-    name: 'Header'
+    name: 'Header',
+    computed: mapGetters([
+      'user'
+    ]),
+    methods: {
+      ...mapActions([
+        'setUserInfo',
+        'setAk'
+      ]),
+      logout(){
+        this.setUserInfo({loginname: '', id: '', avatar_url: '' ,success: false})
+        this.setAk("")
+        this.$router.push({name: 'home'})
+      }
+    }
   }
 </script>
 
@@ -52,5 +72,11 @@
     display: inline-block;
     font-weight: 600;
     letter-spacing: 2px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+  .header-menus > li > a {
+    color: #fff;
+    text-decoration: none;
   }
 </style>

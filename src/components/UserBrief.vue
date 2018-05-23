@@ -12,10 +12,16 @@
         <p class="integral">积分：{{ user.score }}</p>
       </div>
     </div>
+    <div class="panel">
+      <div class="panel-body" v-if="user.loginname === loginUser.loginname">
+        <router-link class="btn btn-success" :to="{name: 'topic-create'}">发布话题</router-link>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'UserBrief',
   data(){
@@ -23,6 +29,9 @@ export default {
       user: {}
     }
   },
+  computed: mapGetters({
+    loginUser: 'user'
+  }),
   methods: {
     getData(){
       let loginname = this.$route.params && this.$route.params.loginname

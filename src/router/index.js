@@ -6,6 +6,10 @@ import User from '@/components/User'
 import UserBrief from '@/components/UserBrief'
 import UserHome from '@/components/UserHome'
 import UserTopics from '@/components/UserTopics'
+import Login from '@/components/Login'
+import TopicHome from '@/components/TopicHome'
+import TopicRule from '@/components/TopicRule'
+import TopicCreate from '@/components/TopicCreate'
 
 Vue.use(Router)
 
@@ -17,6 +21,13 @@ export default new Router({
       name: 'home',
       components: {
         main: Home
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      components: {
+        main: Login
       }
     },
     {
@@ -54,6 +65,23 @@ export default new Router({
           name: 'user-replies',
           components: {
             home: UserTopics
+          }
+        }
+      ]
+    },
+    {
+      path: '/topic',
+      name: 'topic',
+      components: {
+        main: TopicHome,
+        sidebar: TopicRule
+      },
+      children: [
+        {
+          path: 'create',
+          name: 'topic-create',
+          components: {
+            topic: TopicCreate
           }
         }
       ]
