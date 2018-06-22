@@ -169,6 +169,11 @@ background: #b4b4b4;
   border: 1px solid #dcdfe6;
   color: #606266;
 }
+.form-group.error input,
+.form-group.error textarea,
+.form-group.error select {
+  border-color: #c30000;
+}
 .form-group label, 
 .form-group input,
 .form-group select {
