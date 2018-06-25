@@ -148,6 +148,9 @@ background: #b4b4b4;
 .btn-success {
   background: #369219;
 }
+.btn-primary {
+  background: #3374de;
+}
 
 .form-group {
   font-size: 14px;

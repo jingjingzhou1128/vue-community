@@ -1,5 +1,5 @@
 <template>
-  <div class="alert">
+  <div class="alert" :class="typeCls">
     <p class="alert-content">{{ content }}</p>
     <span class="alert-close" @click="close">x</span>
   </div>
@@ -8,10 +8,16 @@
 <script>
 export default {
   name: 'Alert',
-  props: ['content'],
+  props: ['content', 'type'],
   data(){
     return {
-      isClose: false
+      isClose: false,
+      // info: this.content
+    }
+  },
+  computed: {
+    typeCls: function(){
+      return 'alert-' + this.type
     }
   },
   methods: {
@@ -25,17 +31,29 @@ export default {
 
 <style>
   .alert {
-    background: #f5b0b0;
     opacity: 0.7;
     padding: 10px 15px;
     border-radius: 3px;
-    color: #fff;
     position: relative;
+    margin: 10px 0 20px;
+  }
+  .alert-content {
+    margin: 0;
   }
   .alert-close {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 8px;
+    top: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #778087;
+    opacity: 0.2;
+    font-weight: 700;
+    filter: alpha(opacity=20);
+  }
+  .alert-error {
+    color: #c30000;
+    background: #f2dede;
   }
 </style>
 

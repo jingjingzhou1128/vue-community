@@ -9,7 +9,7 @@
       </div>
       <div class="panel-body">
         <!-- <p class="error-info" v-if="errorInfo">{{ errorInfo }}</p> -->
-        <alert :content="errorInfo" v-if="errorInfo" @hidden="handleClose"></alert>
+        <alert :content="errorInfo" v-if="errorInfo" @hidden="handleClose" type="error"></alert>
         <div class="form-group form-group-inline" :class="{ 'error': tabIsError }">
           <label>选择板块:</label>
           <select id="tab" name="tab" v-model="tab">
@@ -76,7 +76,7 @@ export default {
       return true
     },
     publishTopic(){
-      // if(!this.formIsVaild()) return false
+      if(!this.formIsVaild()) return false
       let tab = this.tab
       // if(!tab || !this.title.trim() || !this.content.trim()) return false
       this.$http.post('https://www.vue-js.com/api/v1/topics', {
