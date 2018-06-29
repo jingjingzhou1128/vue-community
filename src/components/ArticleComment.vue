@@ -4,7 +4,9 @@
       <img :src="recomment.author.avatar_url" class="img-responsive">
     </router-link>
     <div class="comment-content">
-      <p><router-link :to="{name: 'user-home', params: {loginname: recomment.author.loginname}}">{{ recomment.author.loginname }}</router-link><small>{{ floor + 1 }}楼{{ comment.create_at | formatTime }}</small></p>
+      <p>
+        <router-link :to="{name: 'user-home', params: {loginname: recomment.author.loginname}}">{{ recomment.author.loginname }}</router-link>
+        <a class="floor" :href="'#' + comment.id">{{ floor + 1 }}楼{{ comment.create_at | formatTime }}</a></p>
       <p style="padding: 15px;margin: 0;" v-html="recomment.content"></p>
     </div>
     <span v-if="loginUser.success" class="thumbs-up-wrapper">
@@ -81,8 +83,10 @@ export default {
   font-weight: 600;
   text-decoration: none;
 }
-.comment-content small {
+.comment-content .floor {
   color: #08c;
+  font-size: 12px;
+  font-weight: 200;
 }
 .thumbs-up-wrapper {
   width: 50px;

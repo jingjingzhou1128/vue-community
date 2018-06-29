@@ -39,17 +39,13 @@ export default {
       }).then(response => {
         console.log(response)
         if(response.data.success) this.content = ''
-        this.$router.push({name: 'article', params: {id: this.topicId, loginname: this.loginUser.loginname}})
+        // this.$router.push({name: 'article', params: {id: this.topicId, loginname: this.loginUser.loginname}})
+        this.$router.push({ path: `/article/${this.topicId}/${this.loginUser.loginname}/#${response.data.reply_id}`})
       }).catch(error => {
         console.log(error)
       })
     }
-  },
-  watch: {
-    $route(){
-      this.getData()
-    }
-  },
+  }
 }
 </script>
 
